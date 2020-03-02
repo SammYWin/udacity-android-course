@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">About Me</string>
+    <string name="tv_name">Ivan Shepard</string>
+    <string name="yellow_star_description">Yellow Star</string>
+    <string name="bio">Hello, my name is Ivan.
+        \n\nI\'m an android developer. And here is some random text:
+        \n\ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+        \ntest test test testtesttest testtesttesttest test
+    </string>
+</resources>
