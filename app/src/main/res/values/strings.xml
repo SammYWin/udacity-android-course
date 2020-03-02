@@ -14,4 +14,6 @@
         \ntest test test testtesttest testtesttesttest test
         \ntest test test testtesttest testtesttesttest test
     </string>
+    <string name="hint_nickname">Enter your nickname</string>
+    <string name="btn_done_text">Done</string>
 </resources>
