@@ -23,12 +23,14 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.example.android.navigation.databinding.FragmentGameBinding
 
 class GameFragment : Fragment() {
     data class Question(
             val text: String,
-            val answers: List<String>)
+            val answers: List<String>
+    )
 
     // The first answer is the correct one.  We randomize the answers before showing the text.
     // All questions must have four answers.  We'd want these to contain references to string
@@ -97,9 +99,11 @@ class GameFragment : Fragment() {
                         binding.invalidateAll()
                     } else {
                         // We've won!  Navigate to the gameWonFragment.
+                        view.findNavController().navigate(R.id.action_gameFragment_to_gameWonFragment)
                     }
                 } else {
                     // Game over! A wrong answer sends us to the gameOverFragment.
+                    view.findNavController().navigate(R.id.action_gameFragment_to_gameOverFragment2)
                 }
             }
         }
