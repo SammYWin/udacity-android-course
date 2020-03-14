@@ -10,9 +10,6 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import com.example.android.navigation.databinding.FragmentTitleBinding
 
-/**
- * A simple [Fragment] subclass.
- */
 class TitleFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
