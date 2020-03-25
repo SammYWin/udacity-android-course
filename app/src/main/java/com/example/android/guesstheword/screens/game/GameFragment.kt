@@ -27,7 +27,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.android.guesstheword.R
@@ -56,16 +55,9 @@ class GameFragment : Fragment() {
         Log.i("GameFragment", "ViewModelProvider was called!")
         viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
-        binding.correctButton.setOnClickListener {
-            viewModel.onCorrect()
-        }
-        binding.skipButton.setOnClickListener {
-            viewModel.onSkip()
-        }
+        binding.gameViewModel = viewModel
+        binding.lifecycleOwner = this
 
-        viewModel.score.observe(viewLifecycleOwner, Observer { newScore-> updateScoreText(newScore) })
-        viewModel.word.observe(viewLifecycleOwner, Observer { newWord -> updateWordText(newWord) })
-        viewModel.currentTime.observe(viewLifecycleOwner, Observer { secondsLeft -> updateTimerText(secondsLeft) })
         viewModel.eventGameFinish.observe(viewLifecycleOwner, Observer { hasFinished ->
             if(hasFinished) {
                 gameFinished()
@@ -80,14 +72,6 @@ class GameFragment : Fragment() {
         binding.timerText.text = DateUtils.formatElapsedTime(secondsLeft)
     }
 
-    /**
-     * Called when the game is finished
-     */
-    private fun gameFinished() {
-        val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
-        findNavController(this).navigate(action)
-    }
-
     /** Methods for updating the UI **/
 
     private fun updateWordText(word : String) {
@@ -99,4 +83,11 @@ class GameFragment : Fragment() {
         binding.scoreText.text = score.toString()
     }
 
+    /**
+     * Called when the game is finished
+     */
+    private fun gameFinished() {
+        val action = GameFragmentDirections.actionGameToScore(viewModel.score.value ?: 0)
+        findNavController(this).navigate(action)
+    }
 }
