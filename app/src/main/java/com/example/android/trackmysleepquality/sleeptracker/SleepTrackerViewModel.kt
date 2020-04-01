@@ -25,6 +25,7 @@ import androidx.lifecycle.Transformations
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.android.trackmysleepquality.formatNights
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.*
 
 /**
@@ -49,6 +50,16 @@ class SleepTrackerViewModel(val database: SleepDatabaseDao, application: Applica
         formatNights(nights, application.resources)
     }
 
+    val startButtonVisible = Transformations.map(currentNight){
+        it == null
+    }
+    val stopButtonVisible = Transformations.map(currentNight){
+        it != null
+    }
+    val clearButtonVisible = Transformations.map(allNights){
+        it.isNotEmpty()
+    }
+
     private val _onNavigatingToSleepQuality = MutableLiveData<SleepNight>()
     val onNavigatingToSleepQuality : LiveData<SleepNight>
         get() = _onNavigatingToSleepQuality
@@ -56,7 +67,6 @@ class SleepTrackerViewModel(val database: SleepDatabaseDao, application: Applica
     init {
         initializeCurrentNight()
     }
-
 
 
     private fun initializeCurrentNight() {
@@ -74,9 +84,6 @@ class SleepTrackerViewModel(val database: SleepDatabaseDao, application: Applica
         }
     }
 
-    fun doneNavigating(){
-        _onNavigatingToSleepQuality.value = null
-    }
 
     //click handler for Start button
     fun onStartTracking(){
@@ -121,6 +128,10 @@ class SleepTrackerViewModel(val database: SleepDatabaseDao, application: Applica
         withContext(Dispatchers.IO){
             database.clear()
         }
+    }
+
+    fun doneNavigating(){
+        _onNavigatingToSleepQuality.value = null
     }
 }
 
