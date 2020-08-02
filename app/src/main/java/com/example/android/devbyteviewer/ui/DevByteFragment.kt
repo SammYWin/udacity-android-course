@@ -67,7 +67,8 @@ class DevByteFragment : Fragment() {
      */
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.playlist.observe(viewLifecycleOwner, Observer<List<Video>> { videos ->
+
+        viewModel.playlist.observe(viewLifecycleOwner, Observer { videos ->
             videos?.apply {
                 viewModelAdapter?.videos = videos
             }
@@ -200,8 +201,7 @@ class DevByteAdapter(val callback: VideoClick) : RecyclerView.Adapter<DevByteVie
 /**
  * ViewHolder for DevByte items. All work is done by data binding.
  */
-class DevByteViewHolder(val viewDataBinding: DevbyteItemBinding) :
-        RecyclerView.ViewHolder(viewDataBinding.root) {
+class DevByteViewHolder(val viewDataBinding: DevbyteItemBinding) : RecyclerView.ViewHolder(viewDataBinding.root) {
     companion object {
         @LayoutRes
         val LAYOUT = R.layout.devbyte_item
